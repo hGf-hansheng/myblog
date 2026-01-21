@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm Paper Theme */
+  --background: #FBF9F6;
+  --foreground: #383838;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(0, 0, 0, 0.05);
+  --accent: #DA7756;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
+
+  --animate-blob: blob 7s infinite;
+  
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Warm Charcoal Theme */
+    --background: #1C1C1E;
+    --foreground: #E6E6E6;
+    --card-bg: rgba(40, 40, 44, 0.4);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --accent: #E08E79;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Syntax Highlighting Base Styles */
+pre {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  background-color: #1e1e1e; /* Default dark background for code */
+  margin: 1.5rem 0;
+  border: 1px solid #333;
+}
+
+code {
+  font-family: var(--font-mono), 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+
+/* Line numbers (optional, controlled by rehype-pretty-code) */
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
+}
+
+/* Typography for MDX */
+.prose h1 { @apply text-4xl font-bold mt-12 mb-6 tracking-tight text-gray-900 dark:text-gray-100; }
+.prose h2 { @apply text-2xl font-semibold mt-10 mb-5 tracking-tight text-gray-800 dark:text-gray-200; }
+.prose h3 { @apply text-xl font-medium mt-8 mb-4 text-gray-800 dark:text-gray-200; }
+.prose p { @apply leading-8 mb-6 text-lg text-gray-600 dark:text-gray-300 font-sans; }
+.prose ul { @apply list-disc list-inside mb-6 text-gray-600 dark:text-gray-300; }
+.prose ol { @apply list-decimal list-inside mb-6 text-gray-600 dark:text-gray-300; }
+.prose a { @apply text-orange-600 dark:text-orange-400 hover:underline underline-offset-4 decoration-1; }
+.prose blockquote { @apply border-l-2 border-orange-500/50 pl-6 italic text-gray-500 my-8 font-serif text-xl; }
+

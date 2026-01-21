@@ -1,0 +1,58 @@
+---
+title: "The Art of Clean Code"
+date: "2024-03-20"
+category: "Software Engineering"
+description: "A deep dive into writing maintainable software with examples in TypeScript and Python."
+tags: ["clean-code", "typescript", "architecture"]
+---
+
+Writing clean code is not just about aesthetics; it's about **maintainability**.
+
+## Why Types Matter
+
+In TypeScript, we can express our intent clearly:
+
+```typescript
+interface User {
+  id: string;
+  username: string;
+  role: 'admin' | 'user';
+}
+
+function isAdmin(user: User): boolean {
+  return user.role === 'admin';
+}
+
+// Usage
+const currentUser: User = {
+  id: '123',
+  username: 'sisyphus',
+  role: 'admin'
+};
+
+console.log(isAdmin(currentUser)); // true
+```
+
+## The Python Equivalent
+
+Here is how we might do it in Python using Type Hints:
+
+```python
+from dataclasses import dataclass
+from typing import Literal
+
+@dataclass
+class User:
+    id: str
+    username: str
+    role: Literal['admin', 'user']
+
+def is_admin(user: User) -> bool:
+    return user.role == 'admin'
+```
+
+## Key Takeaways
+
+1. Use types to document intent.
+2. Keep functions small.
+3. **Always** write tests.
