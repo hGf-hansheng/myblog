@@ -62,7 +62,7 @@ export function PostList({ posts }: { posts: PostMeta[] }) {
   }, [posts, search, selectedCategory]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Search and Filter Section */}
       <div className="flex flex-col items-center gap-6">
         <GlassSearchBar value={search} onChange={handleSearchChange} />
@@ -98,7 +98,7 @@ export function PostList({ posts }: { posts: PostMeta[] }) {
       </div>
 
         {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {filteredPosts.length > 0 ? (
           filteredPosts.map(post => (
             <PostCard key={post.slug} post={post} />

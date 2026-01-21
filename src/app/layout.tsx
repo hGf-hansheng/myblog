@@ -40,7 +40,7 @@ export default function RootLayout({
         <LanguageProvider>
           <AnimatedBackground />
           <GlassNavbar />
-          <main className="pt-32 px-4 pb-20 max-w-4xl mx-auto w-full">
+          <main className="pt-24 sm:pt-28 md:pt-32 px-4 pb-12 sm:pb-16 md:pb-20 max-w-4xl mx-auto w-full">
             {children}
           </main>
         </LanguageProvider>

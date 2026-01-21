@@ -13,7 +13,7 @@ export function GlassNavbarClient({ isAuth }: { isAuth: boolean }) {
   };
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-40 w-auto">
+    <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-40 w-auto">
       <div className={cn(
         "flex items-center gap-1 p-2",
         "bg-white/80 dark:bg-[#2C2C2E]/80 backdrop-blur-xl",

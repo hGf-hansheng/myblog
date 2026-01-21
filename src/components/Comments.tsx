@@ -64,22 +64,22 @@ export function Comments({ slug, initialComments, isAdmin }: AdminCommentsProps)
   };
 
   return (
-    <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
-      <h2 className="text-2xl font-bold mb-8 font-serif flex items-center gap-2">
+    <div className="mt-10 pt-6 sm:mt-16 sm:pt-8 border-t border-gray-200 dark:border-gray-800">
+      <h2 className="text-xl sm:text-2xl font-bold mb-8 font-serif flex items-center gap-2">
         <MessageSquare size={24} className="text-orange-600" />
         {language === 'zh' ? '评论' : 'Comments'}
         <span className="text-sm font-normal text-gray-400 ml-2">({initialComments.length})</span>
       </h2>
 
       {/* Comment List */}
-      <div className="space-y-8 mb-12">
+      <div className="space-y-6 sm:space-y-8 mb-12">
         {initialComments.length === 0 ? (
           <p className="text-gray-500 italic text-center py-8 bg-gray-50 dark:bg-white/5 rounded-xl">
             {language === 'zh' ? '暂无评论' : 'No comments yet.'}
           </p>
         ) : (
           initialComments.map((comment) => (
-            <div key={comment.id} className="group flex gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div key={comment.id} className="group flex gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <div className="flex-shrink-0">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${comment.isAdmin ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-500'}`}>
                   {comment.isAdmin ? <ShieldCheck size={20} /> : <User size={20} />}
@@ -112,7 +112,7 @@ export function Comments({ slug, initialComments, isAdmin }: AdminCommentsProps)
       </div>
 
       {/* Public Post Form */}
-      <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
+      <div className="bg-gray-50 dark:bg-white/5 p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-white/10">
         <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
           {isAdmin ? <ShieldCheck size={18} className="text-orange-600" /> : <MessageSquare size={18} className="text-gray-500" />}
           {language === 'zh' 

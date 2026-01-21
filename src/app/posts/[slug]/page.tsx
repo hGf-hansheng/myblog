@@ -53,7 +53,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <main>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6 sm:mb-8">
         <Link 
           href="/" 
           className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
@@ -72,11 +72,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </div>
 
       <article>
-        <header className="mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
-          <h1 className="text-3xl font-bold tracking-tight mb-4">
+        <header className="mb-6 pb-6 sm:mb-8 sm:pb-8 border-b border-gray-200 dark:border-gray-800">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
             {post.title}
           </h1>
-          <div className="flex items-center gap-4 text-sm text-gray-500 font-mono">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-gray-500 font-mono">
             <time dateTime={post.date}>
               {format(parseISO(post.date), 'MMMM d, yyyy')}
             </time>

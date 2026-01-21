@@ -48,7 +48,7 @@ export function PostForm({ initialData, mode }: PostFormProps) {
   const [showPreview, setShowPreview] = useState(false);
 
   return (
-    <div className="max-w-[90rem] mx-auto px-6 py-12 md:py-20">
+    <div className="max-w-[90rem] mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20">
       <div className="mb-10 max-w-3xl mx-auto">
         <Link 
           href={isEditing ? `/posts/${initialData?.slug}` : "/"} 
@@ -57,7 +57,7 @@ export function PostForm({ initialData, mode }: PostFormProps) {
           <ArrowLeft size={16} />
           {isEditing ? t('backToPosts') : t('backToHome')}
         </Link>
-        <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 dark:text-white">
           {isEditing ? t('editPostTitle') : t('writePost')}
         </h1>
         <p className="mt-2 text-gray-500 dark:text-gray-400">
@@ -69,7 +69,7 @@ export function PostForm({ initialData, mode }: PostFormProps) {
         {isEditing && <input type="hidden" name="originalSlug" value={initialData?.slug} />}
         
         {/* Metadata Section */}
-        <div className="max-w-3xl mx-auto bg-white dark:bg-white/5 p-8 rounded-2xl border border-black/5 dark:border-white/5 shadow-sm">
+        <div className="max-w-3xl mx-auto bg-white dark:bg-white/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-black/5 dark:border-white/5 shadow-sm">
           <h2 className="text-lg font-serif font-semibold mb-6 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
             {t('metadata')}
@@ -138,7 +138,7 @@ export function PostForm({ initialData, mode }: PostFormProps) {
 
         {/* Content Section with Split Preview */}
         <div className="bg-white dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/5 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-white/5">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-white/5">
             <h2 className="text-lg font-serif font-semibold flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
               {t('content')}
@@ -163,7 +163,7 @@ export function PostForm({ initialData, mode }: PostFormProps) {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px] divide-y lg:divide-y-0 lg:divide-x divide-gray-100 dark:divide-white/5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] divide-y lg:divide-y-0 lg:divide-x divide-gray-100 dark:divide-white/5">
             {/* Editor Area */}
             <div className={`flex flex-col ${showPreview ? 'hidden lg:flex' : 'flex'}`}>
               <textarea 
@@ -172,13 +172,13 @@ export function PostForm({ initialData, mode }: PostFormProps) {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="# Introduction\n\nStart writing..."
-                className="flex-1 w-full p-6 bg-transparent border-none focus:ring-0 resize-none font-mono text-sm leading-relaxed outline-none"
+                className="flex-1 w-full p-4 sm:p-6 bg-transparent border-none focus:ring-0 resize-none font-mono text-sm leading-relaxed outline-none"
               />
             </div>
 
             {/* Preview Area */}
             <div className={`flex flex-col bg-gray-50/30 dark:bg-black/20 ${!showPreview ? 'hidden lg:flex' : 'flex'}`}>
-              <div className="flex-1 p-8 overflow-y-auto max-h-[800px] prose dark:prose-invert max-w-none prose-sm sm:prose-base prose-headings:font-serif prose-p:font-sans prose-p:leading-relaxed prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-white/10">
+              <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[800px] prose dark:prose-invert max-w-none prose-sm sm:prose-base prose-headings:font-serif prose-p:font-sans prose-p:leading-relaxed prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-white/10">
                 {content ? (
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {content}

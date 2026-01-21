@@ -10,7 +10,7 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   return (
     <Link href={`/posts/${post.slug}`} className="group block h-full">
-      <article className="relative h-full flex flex-col p-8 rounded-2xl bg-white dark:bg-[#2C2C2E] border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+      <article className="relative h-full flex flex-col p-5 sm:p-6 md:p-8 rounded-2xl bg-white dark:bg-[#2C2C2E] border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
         
         {/* Category & Date */}
         <div className="flex items-center justify-between mb-4">
@@ -23,12 +23,12 @@ export function PostCard({ post }: PostCardProps) {
         </div>
         
         {/* Title */}
-        <h3 className="text-2xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+        <h3 className="text-xl sm:text-2xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
           {post.title}
         </h3>
         
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-8 flex-grow">
+        <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-4 sm:mb-6 md:mb-8 flex-grow">
           {post.description}
         </p>
         

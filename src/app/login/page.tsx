@@ -31,13 +31,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] dark:bg-[#1C1C1E] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] dark:bg-[#1C1C1E] py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="mx-auto h-12 w-12 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center">
             <Lock className="h-6 w-6 text-orange-600" />
           </div>
-          <h2 className="mt-6 text-3xl font-serif font-bold text-gray-900 dark:text-white">
+          <h2 className="mt-6 text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white">
             Admin Access
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
