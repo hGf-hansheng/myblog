@@ -16,7 +16,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ slug:
     category: post.category,
     tags: post.tags.join(', '),
     description: post.description,
-    content: post.content.split('---').slice(2).join('---').trim(), // Remove frontmatter
+    content: post.content,
   };
 
   return (

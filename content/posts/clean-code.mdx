@@ -6,53 +6,199 @@ description: "A deep dive into writing maintainable software with examples in Ty
 tags: ["clean-code", "typescript", "architecture"]
 ---
 
-Writing clean code is not just about aesthetics; it's about **maintainability**.
+# 通用Markdown模板文件
+此模板适配**技术文档、学习笔记、项目总结、实习报告**等常见场景，可根据实际需求删减/新增模块，兼顾结构化和可读性。
 
-## Why Types Matter
+## 一、文档基础信息
+| 项目         | 内容                     |
+|--------------|--------------------------|
+| 文档名称     | XXX（如：Java后端学习笔记-依赖管理） |
+| 编写人       | XXX                      |
+| 编写日期     | YYYY-MM-DD               |
+| 版本号       | V1.0（迭代时更新，如V1.1）|
+| 适用场景     | 个人学习/团队协作/项目交付 |
+| 参考资料     | 官方文档/书籍/博客/论文   |
 
-In TypeScript, we can express our intent clearly:
+## 二、核心目录（按需调整）
+> 点击可快速跳转（Markdown支持锚点链接，格式：`[标题名](#标题锚点)`，锚点为**小写标题名+横线连接**）
+1. [概述](#三概述)
+2. [核心知识点/功能模块](#四核心理知识点功能模块)
+3. [实操步骤/代码实现](#五实操步骤代码实现)
+4. [问题与解决](#六问题与解决)
+5. [总结与复盘](#七总结与复盘)
+6. [拓展与延伸](#八拓展与延伸)
 
-```typescript
-interface User {
-  id: string;
-  username: string;
-  role: 'admin' | 'user';
-}
+## 三、概述
+### 3.1 编写目的
+清晰说明文档核心价值，例：
+- 梳理Spring Boot依赖管理的核心原理和实操方法，形成个人可复用学习笔记；
+- 总结XX项目的开发流程和技术难点，为团队后续同类项目提供参考；
+- 记录实习期间的测试工作内容，完成实习总结汇报。
 
-function isAdmin(user: User): boolean {
-  return user.role === 'admin';
-}
+### 3.2 核心范围
+明确文档覆盖边界，例：
+- 仅讲解Maven的依赖配置、冲突解决，不涉及Gradle相关内容；
+- 涵盖项目的后端接口开发模块，不包含前端页面实现。
 
-// Usage
-const currentUser: User = {
-  id: '123',
-  username: 'sisyphus',
-  role: 'admin'
-};
+### 3.3 前置基础（可选）
+列出阅读/实操所需的前置知识/环境，例：
+- 基础：JavaSE语法、Maven基本使用；
+- 环境：JDK1.8+、Spring Boot2.7.x、IDEA2022+。
 
-console.log(isAdmin(currentUser)); // true
+## 四、核心知识点/功能模块
+### 4.1 知识点1：XXX（一级标题，按需分点）
+#### 4.1.1 核心定义
+简洁阐述概念，避免冗余，例：
+Maven依赖管理是通过`pom.xml`文件统一管理项目所需的第三方jar包，解决jar包冲突、版本不一致等问题。
+
+#### 4.1.2 关键原理/特性
+用**分点/表格**梳理核心逻辑，突出重点，例：
+- 依赖传递：A依赖B，B依赖C，则A自动依赖C；
+- 依赖排除：通过`exclusions`标签排除不需要的传递依赖；
+- 依赖范围：`compile`（默认，全程有效）、`test`（仅测试阶段）、`provided`（容器提供，如servlet-api）。
+
+#### 4.1.3 核心区别（可选）
+易混淆知识点用**对比表格**呈现，例：
+| 依赖范围 | 编译阶段 | 测试阶段 | 运行阶段 | 典型场景       |
+|----------|----------|----------|----------|----------------|
+| compile  | ✔️        | ✔️        | ✔️        | 业务核心包     |
+| test     | ❌        | ✔️        | ❌        | JUnit、TestNG  |
+| provided | ✔️        | ✔️        | ❌        | 容器自带的包   |
+
+### 4.2 知识点2：XXX
+（按4.1的结构复用，按需增减层级）
+
+## 五、实操步骤/代码实现
+### 5.1 环境准备
+分点列出实操的环境配置步骤，清晰可落地，例：
+1. 安装JDK1.8，配置环境变量`JAVA_HOME`；
+2. 安装Maven3.6.3，配置`MAVEN_HOME`和本地仓库路径；
+3. 在IDEA中配置Maven路径，关联本地仓库。
+
+### 5.2 核心代码实现
+#### 5.2.1 代码示例（带注释）
+```java
+// 示例：Spring Boot pom.xml核心依赖配置
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 父工程：Spring Boot起步依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.10</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>demo</name>
+    <description>Demo project for Spring Boot</description>
+    <!-- 核心依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 测试依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
 ```
+#### 5.2.2 代码说明
+重点解释核心代码块的作用，例：
+- `spring-boot-starter-parent`：作为父工程，统一管理Spring Boot所有依赖的版本，避免版本冲突；
+- `spring-boot-starter-web`：Web开发起步依赖，自动引入Tomcat、Spring MVC等核心包；
+- `scope=test`：指定该依赖仅在测试阶段生效，不会被打包到生产环境。
 
-## The Python Equivalent
+### 5.3 运行结果
+记录实操的运行结果，可附**截图说明**（Markdown插入图片格式：`![图片描述](图片路径/网络链接)`），例：
+![项目启动成功](start-success.png)
+- 运行结果：IDEA控制台打印`Started DemoApplication in 2.5 seconds (JVM running for 3.0)`，表示项目启动成功；
+- 访问地址：`http://localhost:8080/hello`，页面返回`Hello Spring Boot`，接口调用成功。
 
-Here is how we might do it in Python using Type Hints:
+## 六、问题与解决
+### 6.1 问题1：XXX（例：Maven依赖包下载失败）
+- 问题现象：IDEA中`pom.xml`标红，提示“Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin:3.1.0”；
+- 问题原因：Maven中央仓库网络延迟，或本地仓库配置错误；
+- 解决方法：
+  1. 配置国内镜像（阿里镜像），修改Maven的`settings.xml`文件；
+  2. 刷新Maven项目（IDEA中点击`Maven -> Reload Project`）；
+  3. 若仍失败，删除本地仓库对应包的缓存，重新下载。
+- 解决结果：依赖包下载成功，`pom.xml`标红消失。
 
-```python
-from dataclasses import dataclass
-from typing import Literal
+### 6.2 问题2：XXX
+（按6.1的结构复用，记录实操/开发中遇到的所有问题，标注**关键问题/高频问题**）
 
-@dataclass
-class User:
-    id: str
-    username: str
-    role: Literal['admin', 'user']
+## 七、总结与复盘
+### 7.1 核心收获
+梳理本次学习/项目/实习的关键收获，例：
+1. 掌握了Maven依赖管理的核心原理，能独立配置`pom.xml`并解决常见的依赖冲突；
+2. 理解了Spring Boot起步依赖的设计思想，实现了简单的Spring Boot Web项目；
+3. 学会了排查Maven和IDEA的基础问题，提升了问题解决能力。
 
-def is_admin(user: User) -> bool:
-    return user.role == 'admin'
+### 7.2 不足与改进
+客观分析自身不足，提出具体改进措施，例：
+1. 不足：对Maven的依赖调解机制理解不够深入，复杂的多模块依赖冲突仍无法快速解决；
+2. 改进：阅读Maven官方文档的依赖调解章节，搭建多模块Spring Boot项目进行实操练习；
+3. 不足：代码注释不够规范，部分核心代码的逻辑未清晰标注；
+4. 改进：遵循阿里巴巴Java开发手册，养成编写规范注释的习惯。
+
+### 7.3 整体评价（可选）
+对本次学习/项目/实习的整体评价，例：
+本次Spring Boot基础学习完成了预期目标，掌握了核心实操方法，但在底层原理和复杂场景应用上仍需加强，后续将通过多练、多查文档逐步提升。
+
+## 八、拓展与延伸
+### 8.1 后续学习/研究方向
+列出相关的拓展知识点，形成学习路径，例：
+1. 深入学习Maven多模块项目构建；
+2. 学习Spring Boot的核心配置（application.yml/application.properties）；
+3. 研究Spring Boot的自动配置原理。
+
+### 8.2 参考资料推荐
+推荐优质的参考资料，标注**重点资料**，例：
+- **官方文档**：[Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)、[Maven官方文档](https://maven.apache.org/guides/index.html)；
+- **书籍**：《Spring Boot实战》、《Maven实战》；
+- **博客**：CSDN、掘金上的Spring Boot/Maven系列教程。
+
+### 8.3 相关工具/资源（可选）
+推荐相关的实用工具/资源，例：
+- Maven镜像配置：阿里镜像、华为镜像；
+- 代码检查：Alibaba Java Coding Guidelines（IDEA插件）；
+- 依赖查询：[Maven Repository](https://mvnrepository.com/)（查询依赖的最新版本）。
+
+---
+## Markdown基础语法提示（快速参考）
+### 1. 标题
+`# 一级标题`、`## 二级标题`、`### 三级标题`（最多六级，建议不超过四级，保证结构清晰）
+### 2. 列表
+- 无序列表：`- 内容`/`* 内容`
+- 有序列表：`1. 内容`/`2. 内容`
+### 3. 代码块
+- 单行代码：`代码内容`
+- 多行代码：```语言 代码内容 ```（语言如java、xml、sql，可实现语法高亮）
+### 4. 链接与图片
+- 链接：`[链接名称](链接地址)`
+- 图片：`![图片描述](图片路径/网络链接)`
+### 5. 强调
+- 粗体：`**粗体内容**`
+- 斜体：`*斜体内容*`
+- 高亮：`==高亮内容==`（部分Markdown编辑器支持）
+### 6. 表格
 ```
+| 表头1 | 表头2 |
+|-------|-------|
+| 内容1 | 内容2 |
+```
+### 7. 分隔线
+`---`/`***`（单独一行，实现分隔线效果）
 
-## Key Takeaways
+---
 
-1. Use types to document intent.
-2. Keep functions small.
-3. **Always** write tests.
+我可以根据你的**具体使用场景**（如Java后端学习笔记、实习总结、项目报告、CV学术笔记）对这个模板进行**定制化修改**，直接删减无关模块、新增专属模块，需要吗？

@@ -1,0 +1,23 @@
+[
+  {
+    "content": "你好",
+    "author": "Admin",
+    "isAdmin": true,
+    "id": "1768998521729",
+    "createdAt": "2026-01-21T12:28:41.729Z"
+  },
+  {
+    "content": "可以的",
+    "author": "Admin",
+    "isAdmin": true,
+    "id": "1768999433891",
+    "createdAt": "2026-01-21T12:43:53.891Z"
+  },
+  {
+    "content": "可以的",
+    "author": "Visitor",
+    "isAdmin": false,
+    "id": "1768999445672",
+    "createdAt": "2026-01-21T12:44:05.672Z"
+  }
+]

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Home, Grid, Plus, Globe, Lock } from 'lucide-react';
+import { Home, Grid, Plus, Globe, Lock, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -48,13 +48,22 @@ export function GlassNavbarClient({ isAuth }: { isAuth: boolean }) {
         <div className="w-px h-4 bg-gray-200 dark:bg-white/10 mx-1" />
 
         {isAuth ? (
-          <Link 
-            href="/new"
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium transition-all shadow-sm active:scale-95"
-          >
-            <Plus size={16} />
-            <span className="hidden sm:inline">{t('newPost')}</span>
-          </Link>
+          <>
+            <Link 
+              href="/new"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium transition-all shadow-sm active:scale-95"
+            >
+              <Plus size={16} />
+              <span className="hidden sm:inline">{t('newPost')}</span>
+            </Link>
+            <a 
+              href="/api/logout"
+              className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-sm font-medium text-gray-400 hover:text-red-500 transition-colors"
+              title="Logout"
+            >
+              <LogOut size={14} />
+            </a>
+          </>
         ) : (
           <Link
             href="/login"

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   /* Warm Paper Theme */
@@ -77,12 +78,26 @@ code[data-line-numbers] > .line::before {
 }
 
 /* Typography for MDX */
-.prose h1 { @apply text-4xl font-bold mt-12 mb-6 tracking-tight text-gray-900 dark:text-gray-100; }
-.prose h2 { @apply text-2xl font-semibold mt-10 mb-5 tracking-tight text-gray-800 dark:text-gray-200; }
-.prose h3 { @apply text-xl font-medium mt-8 mb-4 text-gray-800 dark:text-gray-200; }
-.prose p { @apply leading-8 mb-6 text-lg text-gray-600 dark:text-gray-300 font-sans; }
-.prose ul { @apply list-disc list-inside mb-6 text-gray-600 dark:text-gray-300; }
-.prose ol { @apply list-decimal list-inside mb-6 text-gray-600 dark:text-gray-300; }
-.prose a { @apply text-orange-600 dark:text-orange-400 hover:underline underline-offset-4 decoration-1; }
-.prose blockquote { @apply border-l-2 border-orange-500/50 pl-6 italic text-gray-500 my-8 font-serif text-xl; }
+/* Tailwind Typography Plugin handles most of this now, but overrides are here: */
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--font-serif);
+}
+
+.prose code {
+  color: #eb5757;
+  background-color: rgba(135,131,120,0.15);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* Don't style code blocks' internal code tags the same way */
+.prose pre code {
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  font-weight: inherit;
+}
+
 

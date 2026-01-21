@@ -9,6 +9,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { Comments } from '@/components/Comments';
 import { Edit } from 'lucide-react';
 import { isAuthenticated } from '@/lib/auth';
+import { getComments } from '@/lib/comments';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -21,6 +22,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   const isAuth = await isAuthenticated();
+  const comments = await getComments(slug);
 
   if (!post) {
     notFound();
@@ -89,12 +91,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         </header>
 
-        <div className="prose dark:prose-invert max-w-none">
+        <div className="prose dark:prose-invert max-w-none prose-lg prose-headings:font-serif prose-p:font-sans prose-p:leading-relaxed prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-white/10">
           {/* @ts-expect-error Server Component Async Issues */}
           <MDXRemote source={post.content} options={mdxOptions} />
         </div>
 
-        <Comments />
+        <Comments slug={slug} initialComments={comments} isAdmin={isAuth} />
       </article>
     </main>
   );

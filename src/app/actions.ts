@@ -4,6 +4,37 @@ import fs from 'fs/promises';
 import path from 'path';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { saveComment, deleteComment as removeComment } from '@/lib/comments';
+import { isAuthenticated } from '@/lib/auth';
+
+export async function addComment(slug: string, content: string) {
+  // Public comments allowed
+  // const isAuth = await isAuthenticated(); 
+  
+  if (!content || !content.trim()) {
+    throw new Error('Comment cannot be empty');
+  }
+
+  const isAuth = await isAuthenticated();
+
+  await saveComment(slug, {
+    content: content.trim(),
+    author: isAuth ? 'Admin' : 'Visitor',
+    isAdmin: isAuth,
+  });
+
+  revalidatePath(`/posts/${slug}`);
+}
+
+export async function deleteCommentAction(slug: string, commentId: string) {
+  const isAuth = await isAuthenticated();
+  if (!isAuth) {
+    throw new Error('Unauthorized');
+  }
+
+  await removeComment(slug, commentId);
+  revalidatePath(`/posts/${slug}`);
+}
 
 export async function createPost(formData: FormData) {
   const title = formData.get('title') as string;
