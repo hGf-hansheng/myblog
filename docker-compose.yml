@@ -11,6 +11,8 @@ services:
       - NODE_ENV=production
       # Pass the admin password from .env file
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      # Allow insecure cookies for HTTP deployments (fix for login loops)
+      - ALLOW_INSECURE_COOKIES=true
     volumes:
       # Persist posts
       - ./content/posts:/app/content/posts

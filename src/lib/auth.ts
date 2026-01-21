@@ -13,7 +13,9 @@ export async function login(password: string) {
     // Set cookie for 7 days
     cookieStore.set(AUTH_COOKIE_NAME, 'true', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      // Only set secure cookie in production if not explicitly allowed to be insecure
+      // This helps with Docker deployments behind HTTP proxies
+      secure: process.env.NODE_ENV === 'production' && process.env.ALLOW_INSECURE_COOKIES !== 'true',
       maxAge: 60 * 60 * 24 * 7,
       path: '/',
     });
