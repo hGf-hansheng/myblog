@@ -51,10 +51,17 @@ COPY --from=builder /app/public ./public
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
+# Install su-exec for entrypoint script
+RUN apk add --no-cache su-exec
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Copy entrypoint script
+COPY entrypoint.sh ./
+RUN chmod +x entrypoint.sh
 
 # Ensure content directories exist and have correct permissions
 # We create them here so the copy command works, but they will be overshadowed by volume mounts in prod
@@ -62,12 +69,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 RUN mkdir -p /app/content/posts && chown -R nextjs:nodejs /app/content
 RUN mkdir -p /app/data/comments && chown -R nextjs:nodejs /app/data
 
-USER nextjs
-
 EXPOSE 3000
 
 ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["node", "server.js"]
