@@ -63,6 +63,11 @@ export async function createPost(formData: FormData) {
       .replace(/(^-|-$)/g, '');
   }
 
+  // Fallback if slug is empty (e.g. non-ASCII title)
+  if (!slug) {
+    slug = `post-${Date.now()}`;
+  }
+
   // Format tags
   const tags = tagsStr
     .split(',')
@@ -86,6 +91,7 @@ ${content}`;
   const filePath = path.join(process.cwd(), 'content', 'posts', `${slug}.mdx`);
 
   try {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, mdxContent, 'utf-8');
   } catch (error) {
     console.error('Error saving post:', error);
