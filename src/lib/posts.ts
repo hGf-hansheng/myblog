@@ -45,6 +45,12 @@ export async function getPosts(): Promise<PostMeta[]> {
   });
 }
 
+export async function getCategories(): Promise<string[]> {
+  const posts = await getPosts();
+  const categories = new Set(posts.map(post => post.category));
+  return Array.from(categories).sort();
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   
