@@ -165,3 +165,26 @@ ${content}`;
   revalidatePath(`/posts/${slug}`);
   redirect(`/posts/${slug}`);
 }
+
+export async function deletePost(slug: string) {
+  const isAuth = await isAuthenticated();
+  if (!isAuth) {
+    return { error: 'Unauthorized' };
+  }
+
+  const filePath = path.join(process.cwd(), 'content', 'posts', `${slug}.mdx`);
+
+  try {
+    await fs.unlink(filePath);
+  } catch (error: unknown) {
+    // Ignore if file doesn't exist
+    const err = error as { code?: string };
+    if (err.code !== 'ENOENT') {
+      console.error('Error deleting post:', error);
+      return { error: 'Failed to delete post' };
+    }
+  }
+
+  revalidatePath('/');
+  return { success: true };
+}

@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ToastProvider } from "@/context/ToastContext";
 
 export default function RootLayout({
   children,
@@ -38,11 +39,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} antialiased relative min-h-screen text-gray-800 dark:text-gray-200 selection:bg-stone-200 dark:selection:bg-stone-800`}
       >
         <LanguageProvider>
-          <AnimatedBackground />
-          <GlassNavbar />
-          <main className="pt-24 sm:pt-28 md:pt-32 px-4 pb-12 sm:pb-16 md:pb-20 max-w-4xl mx-auto w-full">
-            {children}
-          </main>
+          <ToastProvider>
+            <AnimatedBackground />
+            <GlassNavbar />
+            <main className="pt-24 sm:pt-28 md:pt-32 px-4 pb-12 sm:pb-16 md:pb-20 max-w-4xl mx-auto w-full">
+              {children}
+            </main>
+          </ToastProvider>
         </LanguageProvider>
       </body>
     </html>

@@ -7,7 +7,9 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { Comments } from '@/components/Comments';
+import { DeletePostButton } from '@/components/DeletePostButton';
 import { Edit } from 'lucide-react';
+
 import { isAuthenticated } from '@/lib/auth';
 import { getComments } from '@/lib/comments';
 
@@ -61,13 +63,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           ← Back to posts
         </Link>
         {isAuth && (
-          <Link
-            href={`/edit/${slug}`}
-            className="flex items-center gap-2 text-sm text-gray-500 hover:text-orange-600 transition-colors"
-          >
-            <Edit size={14} />
-            Edit Post
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/edit/${slug}`}
+              className="flex items-center gap-2 text-sm text-gray-500 hover:text-orange-600 transition-colors"
+            >
+              <Edit size={14} />
+              Edit Post
+            </Link>
+            <DeletePostButton slug={slug} />
+          </div>
         )}
       </div>
 
